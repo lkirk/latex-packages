@@ -1,0 +1,35 @@
+\ProvidesPackage{stats}
+%% Common stats functions
+
+%% distributions
+\newcommand{\Beta}{\operatorname{Beta}}
+\newcommand{\Cauchy}{\operatorname{Cauchy}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\Poi}{\operatorname{Poi}}
+\newcommand{\Unif}{\operatorname{Unif}}
+\newcommand{\Gam}{\operatorname{Gamma}}
+\newcommand{\Bin}{\operatorname{Bin}}
+\newcommand{\Geom}{\operatorname{Geom}}
+
+%% stochastic convergence
+\newcommand\toD{\overset{\mathcal{D}}{\to}}
+\newcommand\toP{\overset{\mathcal{P}}{\to}}
+
+%% stats stuff
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\erf}{\operatorname{erf}}
+
+\newcommand\iid{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny iid}}}{\sim}}}
+
+%% Nice indicator functions
+\DeclareMathAlphabet{\mathmybb}{U}{bbold}{m}{n}
+\newcommand{\1}{\mathmybb{1}}
+
+%% slight hack to make the independence symbol
+%% taken from here: https://tex.stackexchange.com/a/79436
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern3mu{#1#2}}}

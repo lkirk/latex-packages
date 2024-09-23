@@ -1,0 +1,82 @@
+\ProvidesPackage{beamerthemePosterTheme}
+\RequirePackage{ragged2e}
+\RequirePackage{xcolor}
+
+\setbeamertemplate{navigation symbols}{}
+\usefonttheme{professionalfonts}
+
+% adjust spacing between institutions
+\makeatletter
+\def\beamer@andinst{\\[0em]}
+\makeatother
+
+% Triadic color theme #C9C44D,   #C94D59,   #4DA3C9,   #536974,   #4A4A41
+%                        yl         rd         bl        gry        brn
+%                     201,196,77 201,77,89 77,163,201 83,105,116 74,74,65
+% created with https://color.adobe.com/create/color-wheel
+% started with 4DA3C9 pasted in the center using triad mode
+% 4DA3C9 is the 4th to last in palettable.scientific.diverging.Roma_12
+\definecolor{posterYl}{RGB}{201,196,77}
+\definecolor{posterRd}{RGB}{201,77,89}
+\definecolor{posterBl}{RGB}{77,163,201}
+\definecolor{posterGry}{RGB}{83,105,116}
+\definecolor{posterBrn}{RGB}{74,74,65}
+
+% numbered captions
+\setbeamertemplate{caption}[numbered]
+
+% style elements for poster
+\setbeamerfont{block title}{size=\LARGE,series=\bfseries}
+% \setbeamerfont{caption}{size=\normalsize}
+\setbeamercolor{block title}{fg=white,bg=posterBl}
+% \setbeamercolor{headline}{fg=black,bg=gray}
+\setbeamercolor{headlinedivider}{bg=posterGry}
+\setbeamercolor{caption name}{fg=posterGry}
+% \setbeamerfont{caption name}{series=\bfseries}
+
+\setbeamersize{sidebar width left=0pt}
+\setbeamersize{sidebar width right=0pt}
+
+% title definition
+\setbeamertemplate{headline}{
+  \leavevmode
+  \vskip 1.3cm
+  \begin{columns}[c]
+    \begin{column}{.8\paperwidth}
+      \begin{center}
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\Huge{\inserttitle}}\\[1ex]}
+        \vskip.5em
+        \usebeamercolor{author in headline}{\color{fg}\LARGE{\insertauthor}\\[1ex]}
+        \vskip.5em
+        \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}
+      \end{center}
+    \end{column}
+  \end{columns}
+  \vskip 1.3cm
+  \hskip.025\paperwidth
+  \begin{beamercolorbox}[wd=.95\paperwidth,ht=.15cm,rounded=true]{headlinedivider}\end{beamercolorbox}
+}
+
+\setbeamertemplate{block begin}{
+  \begin{beamercolorbox}[center,sep=.5cm,rounded=true]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[rounded=true]{block body}%
+    \vskip.75ex
+    \justifying
+  }
+  \setbeamertemplate{block end}{
+  \end{beamercolorbox}
+  \vskip1.5ex
+}
+
+% \setbeamertemplate{block begin}{
+% \vskip.75ex
+% }
+
+%   \setbeamertemplate{footline}{
+%   \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
+%     \rule[5pt]{.9\paperwidth}{2pt}
+%   \end{beamercolorbox}
+% }
