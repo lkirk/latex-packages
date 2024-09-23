@@ -4,6 +4,6 @@ set -eux
 
 mkdir -p ~/.local/share/texmf/tex/latex/local
 
-rm -r ~/.local/share/texmf/tex/latex/local/{hw,stats}
+rm -r ~/.local/share/texmf/tex/latex/local/{hw,stats} || true
 
 cp -r {hw,stats} ~/.local/share/texmf/tex/latex/local/
