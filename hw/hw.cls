@@ -8,6 +8,10 @@
   \fi
 }
 
+%% Default Options
+\def\hw@hmargin{1in}
+\def\hw@vmargin{1in}
+
 %% Parse Options
 \newcommand{\hw@processoption}[1]{%
   \ifnum\pdfmatch{\string =}{#1}=1
@@ -18,7 +22,7 @@
 }
 
 \def\hw@processoption@#1=#2\relax{%
-  \hw@validateoption{#1}{author,assigntype,num,coursenum}
+  \hw@validateoption{#1}{author,assigntype,num,coursenum,hmargin,vmargin}
   \expandafter\def\csname hw@#1\endcsname{#2}%
 }
 
@@ -49,7 +53,12 @@
   \end{center}
 }
 
-\RequirePackage[tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in]{geometry}
+\RequirePackage[
+  tmargin=\hw@vmargin,
+  bmargin=\hw@vmargin,
+  lmargin=\hw@hmargin,
+  rmargin=\hw@hmargin
+]{geometry}
 \RequirePackage{amsmath, amsfonts, amsthm, amssymb}
 \RequirePackage{enumerate}
 \RequirePackage{enumitem}
