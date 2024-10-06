@@ -12,9 +12,12 @@
 \def\hw@hmargin{1in}
 \def\hw@vmargin{1in}
 
+\def\instring#1#2{TT\fi\begingroup
+  \edef\x{\endgroup\noexpand\in@{#1}{#2}}\x\ifin@}
+
 %% Parse Options
 \newcommand{\hw@processoption}[1]{%
-  \ifnum\pdfmatch{\string =}{#1}=1
+  \if\instring{=}{#1}
   \expandafter\hw@processoption@#1\relax%
   \else
   \PassOptionsToClass{#1}{article}
