@@ -33,7 +33,8 @@
 
 \ProcessOptions\relax
 
-\PassOptionsToClass{notitlepage}{article}
+% Font size hack for now
+\PassOptionsToClass{notitlepage,12pt}{article}
 \LoadClass{article}
 
 \AtBeginDocument{%
