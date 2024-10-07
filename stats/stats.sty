@@ -33,3 +33,28 @@
 %% taken from here: https://tex.stackexchange.com/a/79436
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern3mu{#1#2}}}
+
+\DeclareMathOperator*{\argmin}{argmin}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[2][]{\left\Vert#2\right\Vert_{#1}}
+
+% parens
+\newcommand{\p}[1]{\left( #1 \right)}
+
+% bold shortcuts
+\newcommand{\bx}{\symbf{x}}
+\newcommand{\by}{\symbf{y}}
+\newcommand{\bepsilon}{\symbf{\epsilon}}
+\newcommand{\bbeta}{\symbf{\beta}}
+\newcommand{\bA}{\symbf{A}}
+\newcommand{\bX}{\symbf{X}}
+\newcommand{\bQ}{\symbf{Q}}
+\newcommand{\bR}{\symbf{R}}
+
+% bm stuff, should use when using bm (not xelatex)
+%% \bmdefine\bbeta{\bm\beta}
+%% \bmdefine\bepsilon{\bm\epsilon}
+%% \bmdefine\bX{\bm X}
+%% \bmdefine\by{\bm y}
+%% \bmdefine\bx{\bm x}
+%% \newcommand{\bm}[1]{\symbf{#1}}
