@@ -1,7 +1,35 @@
 \ProvidesPackage{stats}
-%% Common stats functions
+% % Common stats functions
 
-%% distributions
+\usepackage{iftex}
+\ifXeTeX{}
+% bold shortcuts
+\newcommand{\bm}[1]{\symbf{#1}}
+\else
+\usepackage{bm}
+\fi
+
+% lower bold
+\newcommand{\bx}{\bm{x}}
+\newcommand{\by}{\bm{y}}
+\newcommand{\bu}{\bm{u}}
+\newcommand{\bv}{\bm{v}}
+
+% upper bold
+\newcommand{\bA}{\bm{A}}
+\newcommand{\bX}{\bm{X}}
+\newcommand{\bQ}{\bm{Q}}
+\newcommand{\bR}{\bm{R}}
+\newcommand{\bU}{\bm{U}}
+\newcommand{\bV}{\bm{V}}
+
+% greek bold
+\newcommand{\bbeta}{\bm{\beta}}
+\newcommand{\bepsilon}{\bm{\epsilon}}
+\newcommand{\bSigma}{\bm{\Sigma}}
+\newcommand{\bLambda}{\bm{\Lambda}}
+
+% % distributions
 \newcommand{\Beta}{\operatorname{Beta}}
 \newcommand{\Cauchy}{\operatorname{Cauchy}}
 \newcommand{\Exp}{\operatorname{Exp}}
@@ -11,11 +39,11 @@
 \newcommand{\Bin}{\operatorname{Bin}}
 \newcommand{\Geom}{\operatorname{Geom}}
 
-%% stochastic convergence
+% % stochastic convergence
 \newcommand\toD{\overset{\mathcal{D}}{\to}}
 \newcommand\toP{\overset{\mathcal{P}}{\to}}
 
-%% stats stuff
+% % stats stuff
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Corr}{\operatorname{Corr}}
@@ -25,36 +53,36 @@
 
 \newcommand\iid{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny iid}}}{\sim}}}
 
-%% Nice indicator functions
+% % Nice indicator functions
 \DeclareMathAlphabet{\mathmybb}{U}{bbold}{m}{n}
 \newcommand{\1}{\mathmybb{1}}
 
-%% slight hack to make the independence symbol
-%% taken from here: https://tex.stackexchange.com/a/79436
+% % slight hack to make the independence symbol % taken from here:
+% https://tex.stackexchange.com/a/79436
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern3mu{#1#2}}}
 
 \DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\norm}[2][]{\left\Vert#2\right\Vert_{#1}}
 
-% parens
-\newcommand{\p}[1]{\left( #1 \right)}
+% parens / brackets
+% \newcommand{\p}[1]{\left(#1 \right)}
+% \newcommand{\br}[1]{\left[#1 \right]}
+\newcommand{\p}[1]{\mathopen{}\mathclose{\left(#1\right)}}
+\newcommand{\br}[1]{\mathopen{}\mathclose{\left[#1\right]}}
 
-% bold shortcuts
-\newcommand{\bx}{\symbf{x}}
-\newcommand{\by}{\symbf{y}}
-\newcommand{\bepsilon}{\symbf{\epsilon}}
-\newcommand{\bbeta}{\symbf{\beta}}
-\newcommand{\bA}{\symbf{A}}
-\newcommand{\bX}{\symbf{X}}
-\newcommand{\bQ}{\symbf{Q}}
-\newcommand{\bR}{\symbf{R}}
-
-% bm stuff, should use when using bm (not xelatex)
-%% \bmdefine\bbeta{\bm\beta}
-%% \bmdefine\bepsilon{\bm\epsilon}
-%% \bmdefine\bX{\bm X}
-%% \bmdefine\by{\bm y}
-%% \bmdefine\bx{\bm x}
-%% \newcommand{\bm}[1]{\symbf{#1}}
+% \newcommand{\bx}{\symbf{x}}
+% \newcommand{\by}{\symbf{y}}
+% \newcommand{\bu}{\symbf{u}}
+% \newcommand{\bv}{\symbf{v}}
+% \newcommand{\bSigma}{\symbf{\Sigma}}
+% \newcommand{\bepsilon}{\symbf{\epsilon}}
+% \newcommand{\bbeta}{\symbf{\beta}}
+% \newcommand{\bA}{\symbf{A}}
+% \newcommand{\bX}{\symbf{X}}
+% \newcommand{\bQ}{\symbf{Q}}
+% \newcommand{\bR}{\symbf{R}}
+% \newcommand{\bU}{\symbf{U}}
+% \newcommand{\bV}{\symbf{V}}
