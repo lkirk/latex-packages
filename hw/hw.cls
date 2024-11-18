@@ -4,7 +4,7 @@
 \newcommand{\hw@validateoption}[2]{%
   \csname in@\endcsname{,#1,}{,#2,}%
   \expandafter\ifx\csname ifin@\expandafter\endcsname\csname iffalse\endcsname
-  \ClassError{hw}{Unknown argument provided: #1. valid arguments: #2}%
+    \ClassError{hw}{Unknown argument provided: #1. valid arguments: #2}%
   \fi
 }
 
@@ -18,9 +18,9 @@
 %% Parse Options
 \newcommand{\hw@processoption}[1]{%
   \if\instring{=}{#1}
-  \expandafter\hw@processoption@#1\relax%
+    \expandafter\hw@processoption@#1\relax%
   \else
-  \PassOptionsToClass{#1}{article}
+    \PassOptionsToClass{#1}{article}
   \fi
 }
 
@@ -33,23 +33,24 @@
 
 \ProcessOptions\relax
 
+\ifx\hw@assigntype\undefined%
+  \newcommand{\hw@assigntype}{Homework}
+\fi
+\ifx\hw@author\undefined%
+  \ClassError{hw}{author argument not defined}
+\fi
+\ifx\hw@num\undefined%
+  \ClassError{hw}{num argument not defined}
+\fi
+\ifx\hw@coursenum\undefined%
+  \ClassError{hw}{coursenum argument not defined}
+\fi
+
 % Font size hack for now
 \PassOptionsToClass{notitlepage,12pt}{article}
 \LoadClass{article}
 
 \AtBeginDocument{%
-  \ifx \hw@type \undefined
-  \newcommand{\hw@assigntype}{Homework}
-  \fi
-  \ifx \hw@author \undefined
-  \ClassError{hw}{author argument not defined}
-  \fi
-  \ifx \hw@num \undefined
-  \ClassError{hw}{num argument not defined}
-  \fi
-  \ifx \hw@coursenum \undefined
-  \ClassError{hw}{coursenum argument not defined}
-  \fi
   \begin{center}
     {\Large \hw@coursenum{} \hw@assigntype{} \hw@num} \\
     \hw@author \\
@@ -80,39 +81,39 @@
 \setlength{\parskip}{5pt plus 1pt}
 
 \def\indented#1{\list{}{}\item[]}
-\let\indented=\endlist
+\let\indented=\endlist%
 
 \newcounter{questionCounter}
 \newcounter{partCounter}[questionCounter]
 
 \newenvironment{namedquestion}[1][\arabic{questionCounter}]{%
-    \addtocounter{questionCounter}{1}%
-    \setcounter{partCounter}{0}%
-    \vspace{.2in}%
-        \noindent{\bf #1}%
-    \vspace{0.3em} \hrule \vspace{.1in}%
+  \addtocounter{questionCounter}{1}%
+  \setcounter{partCounter}{0}%
+  \vspace{.2in}%
+  \noindent{\bf #1}%
+  \vspace{0.3em} \hrule \vspace{.1in}%
 }{}
 
 \newenvironment{numedquestion}[0]{%
-    \stepcounter{questionCounter}%
-    \vspace{.2in}%
-        \ifx\writtensection\undefined
-        \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
-        \else
-          \if\writtensection0
-          \noindent{\bf \questiontype \; \arabic{questionCounter}. }%
-          \else
-          \noindent{\bf \questiontype \; \writtensection.\arabic{questionCounter} }%
-        \fi
-    \vspace{0.3em} \hrule \vspace{.1in}%
+  \stepcounter{questionCounter}%
+  \vspace{.2in}%
+  \ifx\writtensection\undefined%
+  \noindent{\bf \questiontype\; \arabic{questionCounter}. }%
+  \else
+  \if\writtensection0
+    \noindent{\bf \questiontype\; \arabic{questionCounter}. }%
+  \else
+    \noindent{\bf \questiontype\; \writtensection.\arabic{questionCounter} }%
+  \fi
+  \vspace{0.3em} \hrule \vspace{.1in}%
 }{}
 
 \newenvironment{alphaparts}[0]{%
   \begin{enumerate}[label=\textbf{(\alph*)}]
-}{\end{enumerate}}
+    }{\end{enumerate}}
 
 \newenvironment{arabicparts}[0]{%
-  \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*})]
-}{\end{enumerate}}
+  \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*}]
+    }{\end{enumerate}}
 
 \endinput
