@@ -1,0 +1,9 @@
+[Unit]
+Description=Compilation file watching loop for systemd
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/tex-compile-loop "%h/.config/tex-compile-loop.txt" "%i"
+
+[Install]
+WantedBy=default.target

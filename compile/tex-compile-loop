@@ -1,0 +1,101 @@
+#!/bin/bash
+set -euo pipefail
+
+trap "exit" SIGINT SIGTERM
+
+IN_TEX=${1:-}
+DOC_ID=${2:-}
+
+if [[ "$(basename "${IN_TEX}")" = "tex-compile-loop.txt" ]]; then
+    if [[ -z "${DOC_ID}" ]]; then
+        echo "Error: Config file specified, but no document id specified"
+        echo "usage: ./tex-compile-loop tex-compile-loop.txt <doc-id>"
+        exit 1
+    fi
+    IN_TEX="$(awk -vdoc_id="$DOC_ID" '$1==doc_id{print $2}' "$IN_TEX")"
+fi
+# TODO: unify usage
+if [[ -z "$IN_TEX" ]]; then
+    echo "Error: No input tex file provided"
+    echo "usage: ./tex-compile-loop <document.tex>"
+    exit 1
+fi
+
+TEX_ENGINE="pdflatex"
+TEX_CMD="$TEX_ENGINE -shell-escape -output-directory build -interaction nonstopmode -halt-on-error"
+BIB_ENGINE="bibtex"
+BIB_CMD="$BIB_ENGINE"
+
+if [[ ! -f "$IN_TEX" ]]; then
+    echo "$IN_TEX does not exist"
+    exit 1
+fi
+
+cd "$(dirname "$IN_TEX")"
+
+# shellcheck disable=SC2016
+SCRIPT='
+set -eu
+
+base="'$(basename "$IN_TEX" .tex)'"
+
+tex="$base.tex"
+tex_md5="build/$base.tex.md5"
+
+aux="build/$base.aux"
+aux_md5="$aux.md5"
+
+bib="$base.bib"
+bib_md5="build/$base.bib.md5"
+
+bib_changed=false
+changed=false
+mkdir -p build
+
+if ! md5sum --check --quiet "$tex_md5"; then
+    '$TEX_CMD' "$base.tex" || true
+    md5sum "$tex" > "$tex_md5"
+    changed=true
+fi
+
+if [[ -f "$bib" ]]; then
+    if ! md5sum --check --quiet "$bib_md5"; then
+        ln -frs "$bib" "build/$bib"
+        rm -f "build/$bib.bbl"
+        TEXMFOUTPUT=build '$BIB_CMD' "build/$base" || true
+        md5sum "$bib" > "$bib_md5"
+        bib_changed=true
+    fi
+fi
+
+if [ $bib_changed = true ]; then
+    '$TEX_CMD' "$base.tex" || true
+    '$TEX_CMD' "$base.tex" || true
+    md5sum "$tex" > "$tex_md5"
+    changed=true
+fi
+
+while ! md5sum --check --quiet "$aux_md5"; do
+    '$TEX_CMD' "$base.tex" || true
+    md5sum "build/$base.aux" > "$aux_md5"
+    changed=true
+done
+
+if [ $changed = true ]; then
+    cp "build/$base.pdf" .
+fi
+
+echo "END loop"
+'
+
+while sleep 0.5; do
+    (find . -type f \( \
+     -name '*.tex' \
+     -o -name '*.bib' \
+     -o -name '*.aux' \
+     -o -name '*.pdf' \
+     -o -name '*.png' \
+     -o -name '*.svg' \
+     -and -not -name '*#*' \
+     \) | entr -n -d sh -c "$SCRIPT") || true
+done
