@@ -1,12 +1,12 @@
 \ProvidesPackage{comp}
-\RequirePackage[outputdir=build,cachedir=build/minted]{minted}
-% box around code blocks
+\RequirePackage[outputdir=build,cachedir=minted]{minted}
+% \RequirePackage{minted} box around code blocks
 \RequirePackage{tcolorbox}
 \RequirePackage{etoolbox}
-\BeforeBeginEnvironment{minted}{%
+\BeforeBeginEnvironment{minted}{
   \begin{tcolorbox}[colback=codeboxback,colframe=codeboxframe]
-}%
-\AfterEndEnvironment{minted}{\end{tcolorbox}}%
+    }
+    \AfterEndEnvironment{minted}{\end{tcolorbox}}
 
 \definecolor{codeboxback}{RGB}{250,250,250}
 \definecolor{codeboxframe}{RGB}{189,189,189}
