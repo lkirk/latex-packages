@@ -1,21 +1,22 @@
-\usepackage[math-style=ISO]{unicode-math}
+\ProvidesPackage{xemacros}
+\usepackage{iftex}
+\RequireXeTeX{}
+
+\usepackage[math-style=TeX,bold-style=TeX]{unicode-math}
 \setmainfont[Scale=MatchLowercase]{CMU Serif}
 \setsansfont[Scale=MatchLowercase]{CMU Sans Serif}
 \setmonofont[Scale=MatchLowercase]{CMU Typewriter Text}
-%% \setmathrm{Latin Modern Roman}
-\setmathfont{Latin Modern Math}
-%% Doesn't work for some reason...
-%% \setmathfont{New Computer Modern Math}
+% \setmathrm{Latin Modern Roman}
+% \setmathfont{Latin Modern Math}
+% \setmathfont{New Computer Modern Math} % Doesn't work for some reason... 
 
-%% \setmathfont[range=\mathbb]{}
-%% \setmathfont[range=\mathbb]{NewCM08-Regular}
+% \setmathfont[range=\mathbb]{}
+% \setmathfont[range=\mathbb]{NewCM08-Regular}
 
-%% Fix mathbb and mathcal fonts after switching to unicode
-%% https://tex.stackexchange.com/questions/307745/xelatex-latin-modern-mathbb-and-mathcal
+% Fix mathbb and mathcal fonts after switching to unicode
+% https://tex.stackexchange.com/questions/307745/xelatex-latin-modern-mathbb-and-mathcal
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 \let\mathbb\relax % remove the definition by unicode-math
 \DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
 
-\usepackage{newunicodechar}
-\newunicodechar{₁}{\ensuremath{{}_{\texttt{1}}}}
-\newunicodechar{₂}{\ensuremath{{}_{\texttt{2}}}}
+% bleh, fonts are still weird for bold. Can't figure it out. Going back to pdflatex.
