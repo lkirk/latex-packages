@@ -47,7 +47,7 @@
 \fi
 
 % Font size hack for now
-\PassOptionsToClass{notitlepage,12pt}{article}
+\PassOptionsToClass{notitlepage}{article}
 \LoadClass{article}
 
 \AtBeginDocument{%
@@ -85,6 +85,7 @@
 
 \newcounter{questionCounter}
 \newcounter{partCounter}[questionCounter]
+\numberwithin{equation}{questionCounter}
 
 \newenvironment{namedquestion}[1][\arabic{questionCounter}]{%
   \addtocounter{questionCounter}{1}%
