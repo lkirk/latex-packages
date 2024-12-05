@@ -6,6 +6,6 @@ REPO_DIR="$( dirname -- "$( readlink -f -- "$0"; )"; )"
 
 mkdir -p ~/.local/share/texmf/tex/latex/local
 
-rm -r ~/.local/share/texmf/tex/latex/local/{hw,stats,xemacros} || true
+rm -r ~/.local/share/texmf/tex/latex/local/{hw,stats,xemacros,comp} || true
 
-cp -r "$REPO_DIR"/{hw,stats,xemacros} ~/.local/share/texmf/tex/latex/local/
+cp -r "$REPO_DIR"/{hw,stats,xemacros,comp} ~/.local/share/texmf/tex/latex/local/
