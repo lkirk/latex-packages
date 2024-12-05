@@ -88,10 +88,10 @@ fi
 echo "END loop"
 '
 
+# -o -name '*.bib' \
 while sleep 0.5; do
     (find . -type f \( \
      -name '*.tex' \
-     -o -name '*.bib' \
      -o -name '*.aux' \
      -o -name '*.pdf' \
      -o -name '*.png' \
