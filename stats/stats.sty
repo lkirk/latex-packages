@@ -1,12 +1,12 @@
 \ProvidesPackage{stats}
-% % Common stats functions
 
-\usepackage{iftex}
-\ifXeTeX{}
+\RequirePackage{iftex}
+
 % bold shortcuts
+\ifXeTeX{}
 \newcommand{\bm}[1]{\symbf{#1}}
 \else
-\usepackage{bm}
+\RequirePackage{bm}
 \fi
 
 % lower bold
@@ -29,7 +29,7 @@
 \newcommand{\bSigma}{\bm{\Sigma}}
 \newcommand{\bLambda}{\bm{\Lambda}}
 
-% % distributions
+% distributions
 \newcommand{\Beta}{\operatorname{Beta}}
 \newcommand{\Cauchy}{\operatorname{Cauchy}}
 \newcommand{\Exp}{\operatorname{Exp}}
@@ -39,39 +39,41 @@
 \newcommand{\Bin}{\operatorname{Bin}}
 \newcommand{\Geom}{\operatorname{Geom}}
 
-% % stochastic convergence
+% stochastic convergence
 \newcommand\toD{\overset{\mathcal{D}}{\to}}
 \newcommand\toP{\overset{\mathcal{P}}{\to}}
 
-% % stats stuff
+% stats operators
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Corr}{\operatorname{Corr}}
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\Var}{\operatorname{Var}}
 \newcommand{\erf}{\operatorname{erf}}
-
 \newcommand\iid{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny iid}}}{\sim}}}
 
-% % Nice indicator functions
+% Nice indicator functions
 \DeclareMathAlphabet{\mathmybb}{U}{bbold}{m}{n}
 \newcommand{\1}{\mathmybb{1}}
 
-% % slight hack to make the independence symbol % taken from here:
+% slight hack to make the independence symbol taken from here:
 % https://tex.stackexchange.com/a/79436
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern3mu{#1#2}}}
 
+% general operators
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+
+% norms
 \newcommand{\norm}[2][]{\left\Vert#2\right\Vert_{#1}}
 
 % parens / brackets
-% \newcommand{\p}[1]{\left(#1 \right)}
-% \newcommand{\br}[1]{\left[#1 \right]}
 \newcommand{\p}[1]{\mathopen{}\mathclose{\left(#1\right)}}
 \newcommand{\br}[1]{\mathopen{}\mathclose{\left[#1\right]}}
+% \newcommand{\p}[1]{\left(#1 \right)}
+% \newcommand{\br}[1]{\left[#1 \right]}
 
 % \newcommand{\bx}{\symbf{x}}
 % \newcommand{\by}{\symbf{y}}
