@@ -48,12 +48,17 @@ aux_md5="$aux.md5"
 bib="$base.bib"
 bib_md5="build/$base.bib.md5"
 
+echo "START loop tex=$tex bib=$bib"
+
 bib_changed=false
 changed=false
+status=undefined
 mkdir -p build
 
 if ! md5sum --check --quiet "$tex_md5"; then
-    '$TEX_CMD' "$base.tex" || true
+    echo "-- RUNNING '$TEX_CMD' $base.tex --"
+    { '$TEX_CMD' "$base.tex"; status=$?; } || true
+    echo "DONE ---------------------------"
     md5sum "$tex" > "$tex_md5"
     changed=true
 fi
@@ -62,30 +67,38 @@ if [[ -f "$bib" ]]; then
     if ! md5sum --check --quiet "$bib_md5"; then
         ln -frs "$bib" "build/$bib"
         rm -f "build/$bib.bbl"
-        TEXMFOUTPUT=build '$BIB_CMD' "build/$base" || true
+        echo "-- RUNNING TEXMFOUTPUT=build '$BIB_CMD' build/$base --"
+        { TEXMFOUTPUT=build '$BIB_CMD' "build/$base"; status=$?; } || true
+        echo "DONE ---------------------------"
         md5sum "$bib" > "$bib_md5"
         bib_changed=true
     fi
 fi
 
-if [ $bib_changed = true ]; then
+if [[ $bib_changed = true ]]; then
+    echo "-- RUNNING '$TEX_CMD' $base.tex --"
     '$TEX_CMD' "$base.tex" || true
-    '$TEX_CMD' "$base.tex" || true
+    echo "DONE ---------------------------"
+    echo "-- RUNNING '$TEX_CMD' $base.tex --"
+    { '$TEX_CMD' "$base.tex"; status=$?; } || true
+    echo "DONE ---------------------------"
     md5sum "$tex" > "$tex_md5"
     changed=true
 fi
 
 while ! md5sum --check --quiet "$aux_md5"; do
-    '$TEX_CMD' "$base.tex" || true
+    echo "-- RUNNING '$TEX_CMD' $base.tex --"
+    { '$TEX_CMD' "$base.tex"; status=$?; } || true
+    echo "DONE ---------------------------"
     md5sum "build/$base.aux" > "$aux_md5"
     changed=true
 done
 
-if [ $changed = true ]; then
+if [[ $changed = true && $status = 0 ]]; then
     cp "build/$base.pdf" .
 fi
 
-echo "END loop"
+echo "END loop changed=$changed status=$status"
 '
 
 # -o -name '*.bib' \
