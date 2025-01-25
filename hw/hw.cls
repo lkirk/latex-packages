@@ -8,14 +8,15 @@
   \fi
 }
 
-%% Default Options
+% Default Options
 \def\hw@hmargin{1in}
 \def\hw@vmargin{1in}
 
+% Define a macro to test if string contains
 \def\instring#1#2{TT\fi\begingroup
   \edef\x{\endgroup\noexpand\in@{#1}{#2}}\x\ifin@}
 
-%% Parse Options
+% Parse Options
 \newcommand{\hw@processoption}[1]{%
   \if\instring{=}{#1}
     \expandafter\hw@processoption@#1\relax%
@@ -24,15 +25,18 @@
   \fi
 }
 
+% Validate that options (containing '=') are expected
 \def\hw@processoption@#1=#2\relax{%
-  \hw@validateoption{#1}{author,assigntype,num,coursenum,hmargin,vmargin}
+  \hw@validateoption{#1}{author,assigntype,num,coursenum,hmargin,vmargin,papername}
   \expandafter\def\csname hw@#1\endcsname{#2}%
 }
 
+% Declare processed options
 \DeclareOption*{\hw@processoption{\CurrentOption}}
 
 \ProcessOptions\relax
 
+% Validate that we have processed required options
 \ifx\hw@assigntype\undefined%
   \newcommand{\hw@assigntype}{Homework}
 \fi
@@ -46,7 +50,7 @@
   \ClassError{hw}{coursenum argument not defined}
 \fi
 
-% Font size hack for now
+% We never want a title page
 \PassOptionsToClass{notitlepage}{article}
 \LoadClass{article}
 
@@ -58,12 +62,23 @@
   \end{center}
 }
 
-\RequirePackage[
-  tmargin=\hw@vmargin,
-  bmargin=\hw@vmargin,
-  lmargin=\hw@hmargin,
-  rmargin=\hw@hmargin
-]{geometry}
+\ifx\hw@papername\undefined%
+  \RequirePackage[
+    tmargin=\hw@vmargin,
+    bmargin=\hw@vmargin,
+    lmargin=\hw@hmargin,
+    rmargin=\hw@hmargin
+  ]{geometry}
+\else
+  \RequirePackage[
+    tmargin=\hw@vmargin,
+    bmargin=\hw@vmargin,
+    lmargin=\hw@hmargin,
+    rmargin=\hw@hmargin,
+    papername=\hw@papername
+  ]{geometry}
+\fi
+
 \RequirePackage{amsmath, amsfonts, amsthm, amssymb}
 \RequirePackage{enumerate}
 \RequirePackage{enumitem}
@@ -110,11 +125,15 @@
 }{}
 
 \newenvironment{alphaparts}[0]{%
-  \begin{enumerate}[label=\textbf{(\alph*)}]
-    }{\end{enumerate}}
+  \begin{enumerate}[label=\textbf{(\alph*)}]%
+    }{\end{enumerate}%
+}
 
 \newenvironment{arabicparts}[0]{%
   \begin{enumerate}[label=\textbf{\arabic{questionCounter}.\arabic*}]
-    }{\end{enumerate}}
+    }{\end{enumerate}%
+  \renewcommand{\theequation}{%
+    \arabic{questionCounter}.\arabic{equation}}%
+}
 
 \endinput
