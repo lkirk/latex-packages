@@ -23,11 +23,13 @@
 \newcommand{\bU}{\bm{U}}
 \newcommand{\bV}{\bm{V}}
 \newcommand{\bY}{\bm{Y}}
+\newcommand{\bZ}{\bm{Z}}
 
 % greek bold
 \newcommand{\bbeta}{\bm{\beta}}
 \newcommand{\bepsilon}{\bm{\epsilon}}
 \newcommand{\btheta}{\bm{\theta}}
+\newcommand{\bTheta}{\bm{\Theta}}
 \newcommand{\bSigma}{\bm{\Sigma}}
 \newcommand{\bLambda}{\bm{\Lambda}}
 \newcommand{\bgamma}{\bm{\gamma}}
@@ -42,10 +44,14 @@
 \newcommand{\Gam}{\operatorname{Gamma}}
 \newcommand{\Bin}{\operatorname{Bin}}
 \newcommand{\Geom}{\operatorname{Geom}}
+\newcommand{\Hypergeometric}{\operatorname{Hypergeometric}}
 
 % stochastic convergence
 \newcommand\toD{\overset{\mathcal{D}}{\to}}
 \newcommand\toP{\overset{\mathcal{P}}{\to}}
+
+% equivalent distributions
+\newcommand\eqD{\overset{\mathcal{D}}{=}}
 
 % stats operators
 \renewcommand{\P}{\mathbb{P}}
@@ -55,6 +61,11 @@
 \newcommand{\Var}{\operatorname{Var}}
 \newcommand{\erf}{\operatorname{erf}}
 \newcommand\iid{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny iid}}}{\sim}}}
+\newcommand{\iidRVs}[2]{#1_{1},\ldots,#1_{#2}\iid}
+\newcommand{\iidRVsXn}{\iidRVs{X}{n}}
+
+% reals
+\newcommand{\R}{\mathbb{R}}
 
 % Nice indicator functions
 \DeclareMathAlphabet{\mathmybb}{U}{bbold}{m}{n}
@@ -69,6 +80,7 @@
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
 
 % norms
 \newcommand{\norm}[2][]{\left\Vert#2\right\Vert_{#1}}
@@ -76,3 +88,4 @@
 % parens / brackets
 \newcommand{\p}[1]{\mathopen{}\mathclose{\left(#1\right)}}
 \newcommand{\br}[1]{\mathopen{}\mathclose{\left[#1\right]}}
+\newcommand{\cb}[1]{\mathopen{}\mathclose{\left\{#1\right\}}}
