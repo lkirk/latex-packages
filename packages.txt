@@ -1,0 +1,7 @@
+# Packages to install
+comp
+hw
+stats
+xemacros
+bslides
+eqnsheet
