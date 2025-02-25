@@ -82,6 +82,12 @@
 \RequirePackage{amsmath, amsfonts, amsthm, amssymb}
 \RequirePackage{enumerate}
 \RequirePackage{enumitem}
+\RequirePackage{hyperref}  % used to set pdf title/author
+% title/author should be equivalent to title/author at header of doc
+\hypersetup{
+  pdftitle={\hw@coursenum{} \hw@assigntype{} \hw@num},
+  pdfauthor=\hw@author
+}
 
 % Prefix for questions
 \newcommand{\questiontype}{Question}
