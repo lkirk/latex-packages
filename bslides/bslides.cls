@@ -12,6 +12,11 @@
 \def\bslides@aspect{169}
 \def\bslides@notes{}
 \def\bslides@sectionslides{}
+\def\bslides@serifmath{false}
+
+% true/false values for serifmath
+\def\bslides@true{true}
+\def\bslides@false{false}
 
 % Define a macro to test if string contains
 \def\instring#1#2{TT\fi\begingroup
@@ -28,7 +33,7 @@
 
 % Validate that options (containing '=') are expected
 \def\bslides@processoption@#1=#2\relax{%
-  \bslides@validateoption{#1}{notes,aspect,sectionslides}
+  \bslides@validateoption{#1}{notes,aspect,sectionslides,serifmath}
   \expandafter\def\csname bslides@#1\endcsname{#2}%
 }
 
@@ -62,6 +67,17 @@
       \vfill
     \end{frame}
   }
+  \AtBeginSubsection[]{
+    \begin{frame}
+      \vfill
+      \centering
+      \begin{beamercolorbox}[center]{title}
+        \usebeamerfont{title}\insertsectionhead\par%
+        \usebeamerfont{section}\insertsubsectionhead\par%
+      \end{beamercolorbox}
+      \vfill
+    \end{frame}
+  }
 \fi
 \ifx\bslides@sectionslides\bslides@sstoc%
   \AtBeginSection[]
@@ -71,13 +87,21 @@
       \tableofcontents[currentsection]
     \end{frame}
   }
+  \AtBeginSubsection[]
+  {
+    \begin{frame}
+      \frametitle{Table of Contents}
+      \tableofcontents[currentsection,currentsubsection]
+    \end{frame}
+  }
+\fi
+\ifx\bslides@serifmath\bslides@true%
+  \usefonttheme[onlymath]{serif}
 \fi
 
 % Setup captions (remove the "Figure: " prefix to caption text)
 \RequirePackage[labelformat=empty]{caption}
 % Remove navigation symbols
 \setbeamertemplate{navigation symbols}{}
-% Math font like article font
-% \usefonttheme[onlymath]{serif}
 
 \endinput
