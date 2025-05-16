@@ -9,11 +9,16 @@
 \RequirePackage{bm}
 \fi
 
+% derivative d for integrals
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\Dif}[1]{\mathop{}\!\mathrm{d^#1}}
+
 % lower bold
 \newcommand{\bx}{\bm{x}}
 \newcommand{\by}{\bm{y}}
 \newcommand{\bu}{\bm{u}}
 \newcommand{\bv}{\bm{v}}
+\newcommand{\bz}{\bm{z}}
 
 % upper bold
 \newcommand{\bA}{\bm{A}}
@@ -77,8 +82,8 @@
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern3mu{#1#2}}}
 
 % general operators
-\DeclareMathOperator*{\argmin}{argmin}
-\DeclareMathOperator*{\argmax}{argmax}
+% \DeclareMathOperator*{\argmin}{argmin}
+% \DeclareMathOperator*{\argmax}{argmax}
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\diff}{\mathop{}\!\mathrm{d}}
 
