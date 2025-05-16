@@ -32,6 +32,9 @@ if [[ ! -f "$IN_TEX" ]]; then
 fi
 
 cd "$(dirname "$IN_TEX")"
+if [[ -x compile ]]; then
+    TEX_CMD="$(readlink -f compile)"
+fi
 
 # shellcheck disable=SC2016
 SCRIPT='
